@@ -1,0 +1,12 @@
+{
+    "loginJudul": "登录",
+    "loginDesc": "请输入Email地址",
+    "loginEmail": "Email地址",
+    "loginEmailPlaceholder": "请输入Email地址",
+    "loginPassword": "密码",
+    "loginPasswordPlaceholder": "请输入密码",
+    "loginForgotPassword": "忘记密码?",
+    "loginTry": "Coba Dapatkan & Naik",
+    "loginLoginOption": "Atau login menggunakan",
+    "loginNoAccount": "没有账号? 立即注册"
+}

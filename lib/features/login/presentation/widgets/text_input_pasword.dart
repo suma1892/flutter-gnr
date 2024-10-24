@@ -35,18 +35,24 @@ class _TextInputPasswordState extends State<TextInputPassword> {
         Text(
           widget.label,
           style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
           ),
         ),
         SizedBox(height: 8),
-        TextField(
+        TextFormField(
           controller: widget.controller,
           obscureText: _obscureText,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Password tidak boleh kosong';
+            }
+            return null;
+          },
           keyboardType: widget.keyboardType,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureText ? Icons.visibility_off : Icons.visibility,

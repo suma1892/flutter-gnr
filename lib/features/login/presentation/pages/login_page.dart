@@ -1,6 +1,136 @@
+// class LoginPage extends StatelessWidget {
+//   final TextEditingController emailController = TextEditingController();
+//   final TextEditingController passwordController = TextEditingController();
+
+//   LoginPage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: BlocListener<LoginBloc, LoginState>(
+//           listener: (context, state) {
+//             if (state is LoginSuccess) {
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 SnackBar(content: Text('Login Berhasil!')),
+//               );
+//             } else if (state is LoginFailure) {
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 SnackBar(content: Text('Login Gagal: ${state.error}')),
+//               );
+//             }
+//           },
+//           child: Padding(
+//             padding: const EdgeInsets.all(16.0),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Row(
+//                   children: [
+//                     Spacer(),
+//                     Image.asset(
+//                       Helper.getIconPath('mainLogo'),
+//                       height: 43,
+//                       width: 101,
+//                     ),
+//                   ],
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   AppLocalizations.of(context)!.loginTitle,
+//                   style: TextStyle(
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.bold,
+//                     color: AppColors.navy
+//                   ),
+//                 ),
+//                 SizedBox(height: 2),
+//                 Text(
+//                   AppLocalizations.of(context)!.loginDesc,
+//                   style: TextStyle(color: Colors.grey, fontSize: 12, ),
+//                 ),
+//                 SizedBox(height: 32),
+//                 TextInput(
+//                   label: AppLocalizations.of(context)!.loginEmail,
+//                   hintText: AppLocalizations.of(context)!.loginEmailPlaceholder,
+//                   controller: emailController,
+//                   keyboardType: TextInputType.emailAddress,
+//                 ),
+//                 SizedBox(height: 16),
+//                 TextInputPassword(
+//                   label: AppLocalizations.of(context)!.loginPassword,
+//                   hintText:
+//                       AppLocalizations.of(context)!.loginPasswordPlaceholder,
+//                   controller: passwordController,
+//                   keyboardType: TextInputType.text,
+//                 ),
+//                 Align(
+//                   alignment: Alignment.centerRight,
+//                   child: TextButton(
+//                     onPressed: () {
+//                       // Aksi untuk lupa password
+//                     },
+//                     child:
+//                         Text(AppLocalizations.of(context)!.loginForgotPassword),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 BlocBuilder<LoginBloc, LoginState>(
+//                   builder: (context, state) {
+//                     if (state is LoginLoading) {
+//                       return Center(child: CircularProgressIndicator());
+//                     }
+//                     return ElevatedButton(
+//                         onPressed: () {
+//                           final email = emailController.text;
+//                           final password = passwordController.text;
+
+//                           context.read<LoginBloc>().add(
+//                                 LoginSubmitted(
+//                                     email: email, password: password),
+//                               );
+//                         },
+//                         style: ElevatedButton.styleFrom(
+//                             minimumSize: Size(double.infinity, 50),
+//                             backgroundColor: AppColors.navy,
+//                             shape: RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(5))),
+//                         child: Text(
+//                           AppLocalizations.of(context)!.loginTitle,
+//                           style: AppTextStyle.smallWhite
+//                               .merge(TextStyle(fontWeight: FontWeight.w700)),
+//                         ));
+//                   },
+//                 ),
+//                 SizedBox(height: 16),
+//                 Center(
+//                   child: GestureDetector(
+//                     onTap: () {
+//                       // Aksi untuk mendaftar
+//                     },
+//                     child: Text(
+//                       'Belum punya akun? Daftar Sekarang',
+//                       style: TextStyle(
+//                         color: Colors.blue,
+//                         decoration: TextDecoration.underline,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/core/helper/helper.dart';
+import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
+import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_event.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
@@ -8,11 +138,21 @@ import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_in
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_input_pasword.dart';
 
-class LoginPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +162,9 @@ class LoginPage extends StatelessWidget {
           listener: (context, state) {
             if (state is LoginSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login Berhasil!')),
+                const SnackBar(content: Text('Login Berhasil!')),
               );
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomTab()));
             } else if (state is LoginFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Login Gagal: ${state.error}')),
@@ -32,140 +173,118 @@ class LoginPage extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Spacer(),
-                    Image.asset(
-                      Helper.getIconPath('mainLogo'),
-                      height: 43,
-                      width: 101,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Image.asset(
+                        Helper.getIconPath('mainLogo'),
+                        height: 43,
+                        width: 101,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.loginTitle,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.navy,
                     ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Text(
-                  AppLocalizations.of(context)!.hello_world,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Masukan Email untuk login ke Get & Ride',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                SizedBox(height: 32),
-                TextInput(
-                  label: 'Email',
-                  hintText: 'Masukkan email Anda',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                SizedBox(height: 16),
-                TextInputPassword(
-                  label: 'Password',
-                  hintText: 'Masukkan password Anda',
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      // Aksi untuk lupa password
-                    },
-                    child: Text('Lupa Password?'),
+                  const SizedBox(height: 2),
+                  Text(
+                    AppLocalizations.of(context)!.loginDesc,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                BlocBuilder<LoginBloc, LoginState>(
-                  builder: (context, state) {
-                    if (state is LoginLoading) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    return ElevatedButton(
+                  const SizedBox(height: 32),
+                  TextInput(
+                    label: 'Email',
+                    hintText: 'Masukkan email anda',
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(height: 16),
+                  TextInputPassword(
+                    label: 'Password',
+                    hintText: 'Masukkan password anda',
+                    controller: passwordController,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
                       onPressed: () {
-                        final email = emailController.text;
-                        final password = passwordController.text;
-                        context.read<LoginBloc>().add(
-                              LoginSubmitted(
-                                  email: email, password: password),
-                            );
+                        // Aksi untuk lupa password
                       },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 50),
-                      ),
-                      child: Text('Login'),
-                    );
-                  },
-                ),
-                SizedBox(height: 16),
-                OutlinedButton(
-                  onPressed: () {
-                    // Aksi untuk mencoba Get & Ride
-                  },
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 50),
+                      child: Text(
+                          AppLocalizations.of(context)!.loginForgotPassword),
+                    ),
                   ),
-                  child: Text('Coba Get & Ride'),
-                ),
-                SizedBox(height: 16),
-                Center(
-                  child: Text(
-                    'Atau login menggunakan',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Image.asset(
-                        Helper.getIconPath('mainLogo'),
-                        width: 50,
-                        height: 50,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Image.asset(
-                        Helper.getIconPath('mainLogo'),
-                        width: 50,
-                        height: 50,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Image.asset(
-                        Helper.getIconPath('mainLogo'),
-                        width: 50,
-                        height: 50,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Aksi untuk mendaftar
+                  const SizedBox(height: 16),
+                  BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      if (state is LoginLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final email = emailController.text;
+                            final password = passwordController.text;
+
+                            context.read<LoginBloc>().add(
+                                  LoginSubmitted(
+                                      email: email, password: password),
+                                );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Mohon lengkapi semua field'),
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 50),
+                          backgroundColor: AppColors.navy,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.loginTitle,
+                          style: AppTextStyle.smallWhite.merge(
+                            const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      );
                     },
-                    child: Text(
-                      'Belum punya akun? Daftar Sekarang',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        // Aksi untuk mendaftar
+                      },
+                      child: const Text(
+                        'Belum punya akun? Daftar Sekarang',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

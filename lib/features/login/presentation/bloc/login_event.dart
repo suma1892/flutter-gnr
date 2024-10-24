@@ -14,3 +14,10 @@ class LoginSubmitted extends LoginEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+class TokenRefreshed extends LoginEvent {
+  final String newAccessToken;
+  final String newRefreshToken;
+
+  TokenRefreshed({required this.newAccessToken, required this.newRefreshToken});
+}

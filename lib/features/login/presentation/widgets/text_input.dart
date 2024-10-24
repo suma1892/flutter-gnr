@@ -4,6 +4,7 @@ class TextInput extends StatelessWidget {
   final String label;
   final String hintText;
   final TextEditingController controller;
+  final String errorMessage;
   final bool obscureText;
   final TextInputType keyboardType;
   final IconData? icon;
@@ -13,6 +14,7 @@ class TextInput extends StatelessWidget {
     required this.label,
     required this.hintText,
     required this.controller,
+    this.errorMessage = '',
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.icon,
@@ -26,18 +28,31 @@ class TextInput extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
           ),
         ),
         SizedBox(height: 8),
-        TextField(
+        TextFormField(
           controller: controller,
           obscureText: obscureText,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Email cannot be empty';
+            }
+            // Regex untuk validasi format email
+            String pattern =
+                r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+            RegExp regExp = RegExp(pattern);
+            if (!regExp.hasMatch(value)) {
+              return 'Enter a valid email';
+            }
+            return null; // Kembali null jika tidak ada kesalahan
+          },
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
             prefixIcon: icon != null ? Icon(icon) : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),

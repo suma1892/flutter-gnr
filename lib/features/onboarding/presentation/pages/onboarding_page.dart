@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_get_ride_app/core/helper/icon_name.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/core/helper/helper.dart';
+import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
+import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
+import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -14,11 +17,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   void initState() {
     super.initState();
-    // Delay selama 2 detik, lalu arahkan ke halaman Home
+    // Delay selama 2 detik, lalu periksa status login
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
+      final loginState = context.read<LoginBloc>().state;
+      if (loginState is LoginSuccess && loginState.isLogin) {
+        // Jika sudah login, arahkan ke HomePage
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const BottomTab()),
+        );
+      } else {
+        // Jika belum login, arahkan ke LoginPage
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
+      }
     });
   }
 

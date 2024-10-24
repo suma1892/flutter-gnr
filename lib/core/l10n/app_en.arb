@@ -1,4 +1,12 @@
 {
-  "language": "Bahasa inggris",
-  "hello_world": "Hello World"
+    "loginTitle": "Login",
+    "loginDesc": "Enter Email to log in to Get & Ride",
+    "loginEmail": "Email",
+    "loginEmailPlaceholder": "Enter your email",
+    "loginPassword": "Password",
+    "loginPasswordPlaceholder": "Enter your password",
+    "loginForgotPassword": "Forgot Password?",
+    "loginTry": "Try Get & Ride",
+    "loginLoginOption": "Or login using",
+    "loginNoAccount": "Don't have an account yet? Register Now"
 }

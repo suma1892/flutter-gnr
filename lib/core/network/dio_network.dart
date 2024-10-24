@@ -16,11 +16,11 @@ class DioNetwork {
   static late Dio retryAPI;
 
   static void initDio() {
-    appAPI = Dio(baseOptions(apiUrl));
+    appAPI = Dio(baseOptions(apiUrl!));
     appAPI.interceptors.add(loggerInterceptor());
     appAPI.interceptors.add(appQueuedInterceptorsWrapper());
 
-    retryAPI = Dio(baseOptions(apiUrl));
+    retryAPI = Dio(baseOptions(apiUrl!));
     retryAPI.interceptors.add(loggerInterceptor());
     retryAPI.interceptors.add(interceptorsWrapper());
   }
