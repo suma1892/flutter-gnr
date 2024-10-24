@@ -138,8 +138,6 @@ import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_in
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_input_pasword.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
 
 class LoginPage extends StatefulWidget {
