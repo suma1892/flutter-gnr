@@ -8,6 +8,7 @@ class TextInput extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final IconData? icon;
+  final String? Function(String?)? validator; // Parameter validator tambahan
 
   const TextInput({
     super.key,
@@ -18,6 +19,7 @@ class TextInput extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.icon,
+    this.validator, // Assign validator sebagai parameter opsional
   });
 
   @override
@@ -27,41 +29,34 @@ class TextInput extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           obscureText: obscureText,
-          validator: (value) {
+          validator: validator ?? (value) { // Menggunakan validator custom atau default
             if (value == null || value.isEmpty) {
-              return 'Email cannot be empty';
-            }
-            // Regex untuk validasi format email
-            String pattern =
-                r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-            RegExp regExp = RegExp(pattern);
-            if (!regExp.hasMatch(value)) {
-              return 'Enter a valid email';
+              return errorMessage.isNotEmpty ? errorMessage : 'This field cannot be empty';
             }
             return null; // Kembali null jika tidak ada kesalahan
           },
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+            hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
             prefixIcon: icon != null ? Icon(icon) : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: const BorderSide(color: Colors.blue),
             ),
-            contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           ),
         ),
       ],

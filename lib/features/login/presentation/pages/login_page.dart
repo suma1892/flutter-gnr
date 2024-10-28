@@ -134,11 +134,13 @@ import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_event.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
-import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_input.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_get_ride_app/features/login/presentation/widgets/text_input_pasword.dart';
+import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input_pasword.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
 
-import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/shared/presentation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input.dart';
+import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -162,7 +164,8 @@ class _LoginPageState extends State<LoginPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Login Berhasil!')),
               );
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomTab()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const BottomTab()));
             } else if (state is LoginFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Login Gagal: ${state.error}')),
@@ -206,9 +209,10 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 32),
                   TextInput(
                     label: 'Email',
-                    hintText: 'Masukkan email anda',
+                    hintText: AppLocalizations.of(context)!.emailPlaceholder,
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
+                    validator: validateEmail,
                   ),
                   const SizedBox(height: 16),
                   TextInputPassword(
@@ -270,7 +274,10 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        // Aksi untuk mendaftar
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()));
                       },
                       child: const Text(
                         'Belum punya akun? Daftar Sekarang',
