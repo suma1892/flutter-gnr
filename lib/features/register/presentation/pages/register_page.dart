@@ -3,44 +3,40 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/core/helper/helper.dart';
 import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
 import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
-import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
-import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_event.dart';
-import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input_pasword.dart';
-import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
+import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_bloc.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_event.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_state.dart';
 
 import 'package:flutter_get_ride_app/shared/presentation/pages/bottom_tab.dart';
 import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input.dart';
 import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController fullnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocListener<LoginBloc, LoginState>(
+        child: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
-            if (state is LoginSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Login Berhasil!')),
-              );
-              Navigator.pushReplacement(context,
+            if (state is CheckEmailSuccess) {
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const BottomTab()));
-            } else if (state is LoginFailure) {
+            } else if (state is CheckEmailFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login Gagal: ${state.error}')),
+                SnackBar(content: Text(state.error)),
               );
             }
           },
@@ -63,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    AppLocalizations.of(context)!.loginTitle,
+                    AppLocalizations.of(context)!.signUp,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -72,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    AppLocalizations.of(context)!.loginDesc,
+                    AppLocalizations.of(context)!.signUpDesc,
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12,
@@ -80,43 +76,32 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 32),
                   TextInput(
+                    label: AppLocalizations.of(context)!.fullName,
+                    hintText: AppLocalizations.of(context)!.fullNamePlaceholder,
+                    controller: fullnameController,
+                  ),
+                  const SizedBox(height: 16),
+                  TextInput(
                     label: 'Email',
                     hintText: AppLocalizations.of(context)!.emailPlaceholder,
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     validator: validateEmail,
                   ),
-                  const SizedBox(height: 16),
-                  TextInputPassword(
-                    label: 'Password',
-                    hintText: 'Masukkan password anda',
-                    controller: passwordController,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        // Aksi untuk lupa password
-                      },
-                      child: Text(
-                          AppLocalizations.of(context)!.loginForgotPassword),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  BlocBuilder<LoginBloc, LoginState>(
+                  const SizedBox(height: 40),
+                  BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
-                      if (state is LoginLoading) {
+                      if (state is CheckEmailLoading) {
                         return const Center(child: CircularProgressIndicator());
                       }
                       return ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             final email = emailController.text;
-                            final password = passwordController.text;
+                            // final fullname = fullnameController.text;
 
-                            context.read<LoginBloc>().add(
-                                  LoginSubmitted(
-                                      email: email, password: password),
+                            context.read<RegisterBloc>().add(
+                                  RegisterSubmitted(email: email),
                                 );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -134,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         child: Text(
-                          AppLocalizations.of(context)!.loginTitle,
+                          AppLocalizations.of(context)!.signUp,
                           style: AppTextStyle.smallWhite.merge(
                             const TextStyle(fontWeight: FontWeight.w700),
                           ),
@@ -146,13 +131,13 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
+                                builder: (context) => const LoginPage()));
                       },
                       child: const Text(
-                        'Belum punya akun? Daftar Sekarang',
+                        'Sudah punya akun? Masuk',
                         style: TextStyle(
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
