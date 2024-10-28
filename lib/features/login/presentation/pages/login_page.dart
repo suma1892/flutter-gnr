@@ -7,12 +7,12 @@ import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_event.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input_pasword.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
-
-import 'package:flutter_get_ride_app/shared/presentation/pages/bottom_tab.dart';
-import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input.dart';
+import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input.dart';
 import 'package:flutter_get_ride_app/shared/utils/validations.dart';
+
+import '../../../../shared/presetation/widgets/text_input_pasword.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

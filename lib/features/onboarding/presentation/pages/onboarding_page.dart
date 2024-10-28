@@ -4,7 +4,8 @@ import 'package:flutter_get_ride_app/core/helper/helper.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_state.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
-import 'package:flutter_get_ride_app/shared/presentation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

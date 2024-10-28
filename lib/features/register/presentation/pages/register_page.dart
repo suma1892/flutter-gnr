@@ -8,9 +8,8 @@ import 'package:flutter_get_ride_app/features/login/presentation/pages/login_pag
 import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_bloc.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_event.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_state.dart';
-
-import 'package:flutter_get_ride_app/shared/presentation/pages/bottom_tab.dart';
-import 'package:flutter_get_ride_app/shared/presentation/widgets/text_input.dart';
+import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input.dart';
 import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 
 class RegisterPage extends StatefulWidget {
