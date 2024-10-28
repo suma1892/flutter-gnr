@@ -8,5 +8,10 @@
     "loginForgotPassword": "Lupa Kata Sandi?",
     "loginTry": "Coba Dapatkan & Naik",
     "loginLoginOption": "Atau login menggunakan",
-    "loginNoAccount": "Belum punya akun? Daftar Sekarang"
+    "loginNoAccount": "Belum punya akun? Daftar Sekarang",
+    "signUp": "Daftar",
+    "signUpDesc": "Isi form untuk daftar ke getandride.com",
+    "fullName": "Nama Lengkap",
+    "fullNamePlaceholder": "Masukkan Nama Lengkap Anda",
+    "emailPlaceholder": "Masukkan Email Anda"
 }

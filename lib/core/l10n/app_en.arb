@@ -8,5 +8,10 @@
     "loginForgotPassword": "Forgot Password?",
     "loginTry": "Try Get & Ride",
     "loginLoginOption": "Or login using",
-    "loginNoAccount": "Don't have an account yet? Register Now"
+    "loginNoAccount": "Don't have an account yet? Register Now",
+    "signUp": "Sign Up",
+    "signUpDesc": "Fill out the form to register to getandride.com",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter Your Full Name",
+    "emailPlaceholder": "Enter Your Email"
 }

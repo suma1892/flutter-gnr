@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 // import 'package:ny_times_app/src/shared/presentation/pages/photo_view_page.dart';
 // import 'package:ny_times_app/src/shared/presentation/pages/web_view_page.dart';
 // import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';

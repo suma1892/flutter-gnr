@@ -1,11 +1,7 @@
 // login_bloc.dart
-import 'dart:convert';
 import 'dart:developer' as developer;
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/core/network/dio_client.dart';
-import 'package:flutter_get_ride_app/core/utils/constant/network_constant.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:dio/dio.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -13,7 +9,6 @@ class LoginBloc extends HydratedBloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginSubmitted>((event, emit) async {
       emit(LoginLoading());
-      final Dio dio = Dio();
 
       try {
         var client = DioClient();
