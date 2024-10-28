@@ -1,0 +1,12 @@
+{
+    "loginJudul": "Masuk",
+    "loginDesc": "Masukkan Email untuk masuk ke Get & Ride",
+    "loginEmail": "Email",
+    "loginEmailPlaceholder": "Masukkan email Anda",
+    "loginPassword": "Kata Sandi",
+    "loginPasswordPlaceholder": "Masukkan kata sandi Anda",
+    "loginForgotPassword": "Lupa Kata Sandi?",
+    "loginTry": "Coba Dapatkan & Naik",
+    "loginLoginOption": "Atau login menggunakan",
+    "loginNoAccount": "Belum punya akun? Daftar Sekarang"
+}
