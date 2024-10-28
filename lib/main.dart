@@ -29,31 +29,36 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<LoginBloc>(
-            create: (context) => LoginBloc(),
-          ),
-          BlocProvider<RegisterBloc>(
-            create: (context) => RegisterBloc(),
-          ),
-          BlocProvider<LanguageBloc>(
-            create: (context) => LanguageBloc(),
-          ),
-        ],
-        child: MaterialApp(
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: const Locale('id'),
-          supportedLocales: [
-            Locale('en'), // English
-            Locale('id'), // Indonesia
-            Locale('zh'), // Mandarin
-          ],
-          home: OnboardingPage(),
-        ));
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(),
+        ),
+        BlocProvider<RegisterBloc>(
+          create: (context) => RegisterBloc(),
+        ),
+        BlocProvider<LanguageBloc>(
+          create: (context) => LanguageBloc(),
+        ),
+      ],
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          return MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: state.locale, // Menggunakan locale dari state
+            supportedLocales: [
+              Locale('en'), // English
+              Locale('id'), // Indonesia
+              Locale('zh'), // Mandarin
+            ],
+            home: OnboardingPage(),
+          );
+        },
+      ),
+    );
   }
 }
