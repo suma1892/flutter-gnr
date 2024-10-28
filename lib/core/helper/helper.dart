@@ -29,7 +29,6 @@ class Helper {
   }
 
   static String getIconPath(String name) {
-    print('icon name = , $name');
     return "$iconPath$name.png";
   }
 

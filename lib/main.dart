@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_get_ride_app/features/home/presentation/bloc/language_bloc.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter_get_ride_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,20 +11,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-// void main() async {
-//   await dotenv.load(fileName: ".env.development");
-//   runApp(const MainApp());
-// }
-
 Future<void> main() async {
   await dotenv.load(fileName: ".env.development");
-  // final dio = Dio();
-  // final authenticationBloc = LoginBloc();
 
-  // dio.interceptors.add(
-  //   ApiInterceptor(dio: dio, authenticationBloc: authenticationBloc),
-  // );
-  
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
@@ -45,6 +35,9 @@ class MainApp extends StatelessWidget {
           ),
           BlocProvider<RegisterBloc>(
             create: (context) => RegisterBloc(),
+          ),
+          BlocProvider<LanguageBloc>(
+            create: (context) => LanguageBloc(),
           ),
         ],
         child: MaterialApp(
