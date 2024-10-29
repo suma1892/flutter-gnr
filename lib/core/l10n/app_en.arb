@@ -20,5 +20,9 @@
     "passwordConfirmation": "Confirm Password",
     "passwordConfirmationPlaceholder": "Confirm Password",
     "errorConfirmationPassword": "Confirmation Password doesn't match",
-    "errorValidatePassword": "Password must be at least 8 characters and include both letters and numbers"
+    "errorValidatePassword": "Password must be at least 8 characters and include both letters and numbers",
+    "next": "Next",
+    "verification": "Verification",
+    "chooseVerificationMethod": "Choose your verification method for security and proceed with the payment of your order.",
+    "email": "Email"
 }
