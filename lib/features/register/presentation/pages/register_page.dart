@@ -13,6 +13,13 @@ import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input.dart'
 
 import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 
+class UserData {
+  final String fullname;
+  final String email;
+
+  UserData({required this.fullname, required this.email});
+}
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -32,8 +39,18 @@ class _RegisterPageState extends State<RegisterPage> {
         child: BlocListener<CheckEmailBloc, CheckEmailState>(
           listener: (context, state) {
             if (state is CheckEmailSuccess) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const RegisterPasswordPage()));
+              final email = emailController.text;
+              final fullname = fullnameController.text;
+
+              UserData userData = UserData(
+                fullname: fullname,
+                email: email,
+              );
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RegisterPasswordPage(userData: userData)));
             } else if (state is CheckEmailFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.error)),
@@ -98,7 +115,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             final email = emailController.text;
-                            // final fullname = fullnameController.text;
 
                             context.read<CheckEmailBloc>().add(
                                   CheckEmailSubmitted(email: email),
@@ -131,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                         Navigator.push(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginPage()));

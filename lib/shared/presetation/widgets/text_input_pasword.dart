@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 
 class TextInputPassword extends StatefulWidget {
@@ -7,6 +5,7 @@ class TextInputPassword extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
+  final FormFieldValidator<String>? validator;
 
   const TextInputPassword({
     super.key,
@@ -14,6 +13,7 @@ class TextInputPassword extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
+    this.validator,
   });
 
   @override
@@ -36,16 +36,16 @@ class _TextInputPasswordState extends State<TextInputPassword> {
       children: [
         Text(
           widget.label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
           controller: widget.controller,
           obscureText: _obscureText,
-          validator: (value) {
+          validator: widget.validator ?? (value) {
             if (value == null || value.isEmpty) {
               return 'Password tidak boleh kosong';
             }
@@ -54,7 +54,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
           keyboardType: widget.keyboardType,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+            hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureText ? Icons.visibility_off : Icons.visibility,
@@ -66,9 +66,10 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: const BorderSide(color: Colors.blue),
             ),
-            contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           ),
         ),
       ],

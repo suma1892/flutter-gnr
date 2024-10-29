@@ -13,5 +13,12 @@
     "signUpDesc": "Fill out the form to register to getandride.com",
     "fullName": "Full Name",
     "fullNamePlaceholder": "Enter Your Full Name",
-    "emailPlaceholder": "Enter Your Email"
+    "emailPlaceholder": "Enter Your Email",
+    "createPassword": "Create a Password",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "passwordConfirmation": "Confirm Password",
+    "passwordConfirmationPlaceholder": "Confirm Password",
+    "errorConfirmationPassword": "Confirmation Password doesn't match",
+    "errorValidatePassword": "Password must be at least 8 characters and include both letters and numbers"
 }
