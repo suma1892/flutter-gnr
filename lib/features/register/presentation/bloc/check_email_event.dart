@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-abstract class RegisterEvent extends Equatable {
+abstract class CheckEmailEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-class RegisterSubmitted extends RegisterEvent {
+class CheckEmailSubmitted extends CheckEmailEvent {
   final String email;
 
-  RegisterSubmitted({required this.email});
+  CheckEmailSubmitted({required this.email});
 
   @override
   List<Object> get props => [email];

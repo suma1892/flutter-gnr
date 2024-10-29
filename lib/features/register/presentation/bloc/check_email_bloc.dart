@@ -1,12 +1,12 @@
 import 'dart:developer' as developer;
 import 'package:flutter_get_ride_app/core/network/dio_client.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'register_event.dart';
-import 'register_state.dart';
+import 'check_email_event.dart';
+import 'check_email_state.dart';
 
-class RegisterBloc extends HydratedBloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(CheckEmailInitial()) {
-    on<RegisterSubmitted>((event, emit) async {
+class CheckEmailBloc extends HydratedBloc<CheckEmailEvent, CheckEmailState> {
+  CheckEmailBloc() : super(CheckEmailInitial()) {
+    on<CheckEmailSubmitted>((event, emit) async {
       emit(CheckEmailLoading());
 
       try {
@@ -38,7 +38,7 @@ class RegisterBloc extends HydratedBloc<RegisterEvent, RegisterState> {
   }
 
   @override
-  RegisterState? fromJson(Map<String, dynamic> json) {
+  CheckEmailState? fromJson(Map<String, dynamic> json) {
     try {
       final isRegistered = json['isRegistered'] as bool;
       return isRegistered ? CheckEmailSuccess() : CheckEmailInitial();
@@ -48,7 +48,7 @@ class RegisterBloc extends HydratedBloc<RegisterEvent, RegisterState> {
   }
 
   @override
-  Map<String, dynamic>? toJson(RegisterState state) {
+  Map<String, dynamic>? toJson(CheckEmailState state) {
     return {
       'isRegistered': state.isRegistered,
     };
