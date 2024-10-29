@@ -24,7 +24,7 @@ class Helper {
   // }
 
   /// Get image picture path
-  static String getImagePath(ImagesName name) {
+  static String getImagePath(String name) {
     return "$imagePath$name.png";
   }
 
