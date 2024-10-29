@@ -5,11 +5,12 @@ import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
 import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
-import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_bloc.dart';
-import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_event.dart';
-import 'package:flutter_get_ride_app/features/register/presentation/bloc/register_state.dart';
-import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
+import 'package:flutter_get_ride_app/features/register-password/presentation/pages/register_password_page.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/check_email_bloc.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/check_email_event.dart';
+import 'package:flutter_get_ride_app/features/register/presentation/bloc/check_email_state.dart';
 import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input.dart';
+
 import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -28,11 +29,11 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocListener<RegisterBloc, RegisterState>(
+        child: BlocListener<CheckEmailBloc, CheckEmailState>(
           listener: (context, state) {
             if (state is CheckEmailSuccess) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const BottomTab()));
+                  MaterialPageRoute(builder: (context) => const RegisterPasswordPage()));
             } else if (state is CheckEmailFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.error)),
@@ -88,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: validateEmail,
                   ),
                   const SizedBox(height: 40),
-                  BlocBuilder<RegisterBloc, RegisterState>(
+                  BlocBuilder<CheckEmailBloc, CheckEmailState>(
                     builder: (context, state) {
                       if (state is CheckEmailLoading) {
                         return const Center(child: CircularProgressIndicator());
@@ -99,8 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             final email = emailController.text;
                             // final fullname = fullnameController.text;
 
-                            context.read<RegisterBloc>().add(
-                                  RegisterSubmitted(email: email),
+                            context.read<CheckEmailBloc>().add(
+                                  CheckEmailSubmitted(email: email),
                                 );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
