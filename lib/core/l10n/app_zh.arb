@@ -13,5 +13,12 @@
     "signUpDesc": "请填写以下的表格",
     "fullName": "姓名",
     "fullNamePlaceholder": "请输入您的姓名",
-    "emailPlaceholder": "请输入您的Email地址"
+    "emailPlaceholder": "请输入您的Email地址",
+    "createPassword": "创建密码",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "passwordConfirmation": "确认密码",
+    "passwordConfirmationPlaceholder": "确认密码",
+    "errorConfirmationPassword": "确认密码不一致",
+    "errorValidatePassword": "密码至少为 8 个字符，并且至少包含一个数字和一个字母"
 }

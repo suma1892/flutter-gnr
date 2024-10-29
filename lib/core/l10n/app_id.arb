@@ -13,5 +13,12 @@
     "signUpDesc": "Isi form untuk daftar ke getandride.com",
     "fullName": "Nama Lengkap",
     "fullNamePlaceholder": "Masukkan Nama Lengkap Anda",
-    "emailPlaceholder": "Masukkan Email Anda"
+    "emailPlaceholder": "Masukkan Email Anda",
+    "createPassword": "Buat Kata Sandi",
+    "password": "Kata Sandi",
+    "passwordPlaceholder": "Masukkan kata sandi Anda",
+    "passwordConfirmation": "Konfirmasi Kata Sandi",
+    "passwordConfirmationPlaceholder": "Konfirmasi Kata Sandi Anda",
+    "errorConfirmationPassword": "Konfirmasi Password tidak sama",
+    "errorValidatePassword": "Kata sandi minimal 8 karakter, dan memiliki setidaknya satu angka dan huruf"
 }
