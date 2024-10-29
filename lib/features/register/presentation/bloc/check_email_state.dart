@@ -1,31 +1,31 @@
 // login_state.dart
 import 'package:equatable/equatable.dart';
 
-abstract class RegisterState extends Equatable {
+abstract class CheckEmailState extends Equatable {
   final bool isRegistered;
 
-  const RegisterState({required this.isRegistered});
+  const CheckEmailState({required this.isRegistered});
 
   @override
   List<Object?> get props => [isRegistered];
 }
 
-class CheckEmailInitial extends RegisterState {
+class CheckEmailInitial extends CheckEmailState {
   const CheckEmailInitial() : super(isRegistered: false);
 }
 
-class CheckEmailLoading extends RegisterState {
+class CheckEmailLoading extends CheckEmailState {
   const CheckEmailLoading() : super(isRegistered: false);
 }
 
-class CheckEmailSuccess extends RegisterState {
+class CheckEmailSuccess extends CheckEmailState {
   const CheckEmailSuccess() : super(isRegistered: true);
 
   @override
   List<Object?> get props => [isRegistered];
 }
 
-class CheckEmailFailure extends RegisterState {
+class CheckEmailFailure extends CheckEmailState {
   final String error;
 
   const CheckEmailFailure({required this.error})
