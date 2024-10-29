@@ -20,5 +20,9 @@
     "passwordConfirmation": "Konfirmasi Kata Sandi",
     "passwordConfirmationPlaceholder": "Konfirmasi Kata Sandi Anda",
     "errorConfirmationPassword": "Konfirmasi Password tidak sama",
-    "errorValidatePassword": "Kata sandi minimal 8 karakter, dan memiliki setidaknya satu angka dan huruf"
+    "errorValidatePassword": "Kata sandi minimal 8 karakter, dan memiliki setidaknya satu angka dan huruf",
+    "next": "Lanjutkan",
+    "verification": "Verifikasi",
+    "chooseVerificationMethod": "Pilih metode verifikasi anda untuk kemanan dan melanjutkan pembayaran pemesanan anda",
+    "email": "Email"
 }

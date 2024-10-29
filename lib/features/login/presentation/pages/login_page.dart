@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 32),
                   TextInput(
-                    label: 'Email',
+                    label: AppLocalizations.of(context)!.email,
                     hintText: AppLocalizations.of(context)!.emailPlaceholder,
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,

@@ -20,5 +20,9 @@
     "passwordConfirmation": "确认密码",
     "passwordConfirmationPlaceholder": "确认密码",
     "errorConfirmationPassword": "确认密码不一致",
-    "errorValidatePassword": "密码至少为 8 个字符，并且至少包含一个数字和一个字母"
+    "errorValidatePassword": "密码至少为 8 个字符，并且至少包含一个数字和一个字母",
+    "next": "继续",
+    "verification": "验证",
+    "chooseVerificationMethod": "选择您的验证方法以确保安全并继续支付您的订单",
+    "email": "Email地址"
 }

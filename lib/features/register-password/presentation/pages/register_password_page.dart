@@ -4,8 +4,8 @@ import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
 import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
+import 'package:flutter_get_ride_app/features/register-select-verification-method/presentation/pages/register_verification_page.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
-import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
 import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input_pasword.dart';
 
 class RegisterPasswordPage extends StatefulWidget {
@@ -35,14 +35,22 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
       final passwordConfirmation = passwordConfirmationController.text;
 
       if (password == passwordConfirmation) {
-        // Lakukan proses submit data, misalnya simpan ke backend atau navigasi ke halaman berikutnya
+        UserData userData = UserData(
+            fullname: widget.userData.fullname,
+            email: widget.userData.email,
+            password: password);
+
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BottomTab()),
+          MaterialPageRoute(
+              builder: (context) =>
+                  RegisterSelectVerificationMethodPage(userData: userData)),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.errorConfirmationPassword)),
+          SnackBar(
+              content: Text(
+                  AppLocalizations.of(context)!.errorConfirmationPassword)),
         );
       }
     } else {
@@ -101,7 +109,8 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a password';
                     } else if (!validatePassword(value)) {
-                      return AppLocalizations.of(context)!.errorValidatePassword;
+                      return AppLocalizations.of(context)!
+                          .errorValidatePassword;
                     }
                     return null;
                   },
@@ -109,14 +118,15 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                 const SizedBox(height: 16),
                 TextInputPassword(
                   label: AppLocalizations.of(context)!.passwordConfirmation,
-                  hintText:
-                      AppLocalizations.of(context)!.passwordConfirmationPlaceholder,
+                  hintText: AppLocalizations.of(context)!
+                      .passwordConfirmationPlaceholder,
                   controller: passwordConfirmationController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a password';
                     } else if (!validatePassword(value)) {
-                      return AppLocalizations.of(context)!.errorValidatePassword;
+                      return AppLocalizations.of(context)!
+                          .errorValidatePassword;
                     }
                     return null;
                   },
@@ -132,7 +142,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                     ),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.signUp,
+                    AppLocalizations.of(context)!.next,
                     style: AppTextStyle.smallWhite.merge(
                       const TextStyle(fontWeight: FontWeight.w700),
                     ),

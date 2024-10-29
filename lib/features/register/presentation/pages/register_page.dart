@@ -16,8 +16,9 @@ import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 class UserData {
   final String fullname;
   final String email;
+  final String? password;
 
-  UserData({required this.fullname, required this.email});
+  UserData({required this.fullname, required this.email, this.password});
 }
 
 class RegisterPage extends StatefulWidget {
@@ -99,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 16),
                   TextInput(
-                    label: 'Email',
+                    label: AppLocalizations.of(context)!.email,
                     hintText: AppLocalizations.of(context)!.emailPlaceholder,
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
