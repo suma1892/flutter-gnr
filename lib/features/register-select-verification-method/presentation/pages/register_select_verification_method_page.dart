@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_get_ride_app/features/register-send-otp/presentation/pages/register_send_otp_page.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
 
 class RegisterSelectVerificationMethodPage extends StatefulWidget {
@@ -54,13 +55,23 @@ class _RegisterSelectVerificationMethodPageState
               ),
               SizedBox(height: 30),
               SizedBox(
-                width: double.infinity, 
+                width: double.infinity,
                 child: OutlinedButton.icon(
                   onPressed: () {
-                    
+                    UserData userData = UserData(
+                        fullname: widget.userData.fullname,
+                        email: widget.userData.email,
+                        password: widget.userData.password);
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RegisterSendOtpPage(userData: userData)));
                   },
                   icon: Icon(Icons.email, color: Colors.black),
-                  label: Text(AppLocalizations.of(context)!.email, style: TextStyle(color: Colors.black)),
+                  label: Text(AppLocalizations.of(context)!.email,
+                      style: TextStyle(color: Colors.black)),
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     shape: RoundedRectangleBorder(
