@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
 import 'package:flutter_get_ride_app/features/register-send-otp/presentation/pages/register_send_otp_page.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
 
@@ -50,7 +51,7 @@ class _RegisterSelectVerificationMethodPageState
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: AppColors.grey4,
                 ),
               ),
               SizedBox(height: 30),
@@ -61,7 +62,9 @@ class _RegisterSelectVerificationMethodPageState
                     UserData userData = UserData(
                         fullname: widget.userData.fullname,
                         email: widget.userData.email,
-                        password: widget.userData.password);
+                        password: widget.userData.password,
+                        passwordConfirmation:
+                            widget.userData.passwordConfirmation);
 
                     Navigator.push(
                         context,
