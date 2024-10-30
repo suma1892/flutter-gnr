@@ -38,7 +38,8 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
         UserData userData = UserData(
             fullname: widget.userData.fullname,
             email: widget.userData.email,
-            password: password);
+            password: password,
+            passwordConfirmation: passwordConfirmation);
 
         Navigator.push(
           context,

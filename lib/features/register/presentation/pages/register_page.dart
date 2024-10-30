@@ -16,9 +16,14 @@ import 'package:flutter_get_ride_app/shared/utils/validations.dart';
 class UserData {
   final String fullname;
   final String email;
-  final String? password;
+  final String password;
+  final String passwordConfirmation;
 
-  UserData({required this.fullname, required this.email, this.password});
+  UserData(
+      {required this.fullname,
+      required this.email,
+      required this.password,
+      required this.passwordConfirmation});
 }
 
 class RegisterPage extends StatefulWidget {
@@ -46,12 +51,15 @@ class _RegisterPageState extends State<RegisterPage> {
               UserData userData = UserData(
                 fullname: fullname,
                 email: email,
+                password: '',
+                passwordConfirmation: '',
               );
 
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => RegisterPasswordPage(userData: userData)));
+                      builder: (context) =>
+                          RegisterPasswordPage(userData: userData)));
             } else if (state is CheckEmailFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.error)),
