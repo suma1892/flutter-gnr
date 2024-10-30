@@ -4,7 +4,7 @@ import 'package:flutter_get_ride_app/core/styles/app_colors.dart';
 import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/pages/login_page.dart';
-import 'package:flutter_get_ride_app/features/register-select-verification-method/presentation/pages/register_verification_page.dart';
+import 'package:flutter_get_ride_app/features/register-select-verification-method/presentation/pages/register_select_verification_method_page.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
 import 'package:flutter_get_ride_app/shared/presetation/widgets/text_input_pasword.dart';
 
