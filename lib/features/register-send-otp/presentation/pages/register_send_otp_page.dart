@@ -6,6 +6,7 @@ import 'package:flutter_get_ride_app/core/styles/app_text_style.dart';
 import 'package:flutter_get_ride_app/features/register-send-otp/presentation/bloc/register_bloc.dart';
 import 'package:flutter_get_ride_app/features/register-send-otp/presentation/bloc/register_event.dart';
 import 'package:flutter_get_ride_app/features/register-send-otp/presentation/bloc/register_state.dart';
+import 'package:flutter_get_ride_app/features/register-verify-otp/presentation/pages/register_verify_otp.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/pages/register_page.dart';
 
 class RegisterSendOtpPage extends StatefulWidget {
@@ -14,10 +15,10 @@ class RegisterSendOtpPage extends StatefulWidget {
   const RegisterSendOtpPage({super.key, required this.userData});
 
   @override
-  State<RegisterSendOtpPage> createState() => _RegisterSendOtpPage();
+  State<RegisterSendOtpPage> createState() => _RegisterSendOtpPageState();
 }
 
-class _RegisterSendOtpPage extends State<RegisterSendOtpPage> {
+class _RegisterSendOtpPageState extends State<RegisterSendOtpPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +35,30 @@ class _RegisterSendOtpPage extends State<RegisterSendOtpPage> {
             elevation: 0,
           ),
           body: BlocListener<RegisterBloc, RegisterState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if (state is RegisterSuccess) {
+                UserData userData = UserData(
+                  fullname: widget.userData.fullname,
+                  email: widget.userData.email,
+                  password: widget.userData.password,
+                  passwordConfirmation: widget.userData.passwordConfirmation,
+                );
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            RegisterVerifyOtpPage(userData: userData)));
+                return;
+              }
+
+              if (state is RegisterFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+                return;
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
