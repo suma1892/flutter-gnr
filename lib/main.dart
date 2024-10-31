@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_get_ride_app/features/home/presentation/bloc/language_bloc.dart';
+import 'package:flutter_get_ride_app/features/home/presentation/bloc/service_bloc.dart';
 import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter_get_ride_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -38,6 +39,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider<LanguageBloc>(
           create: (context) => LanguageBloc(),
+        ),
+        BlocProvider<ServicesBloc>(
+          create: (context) => ServicesBloc(),
         ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
