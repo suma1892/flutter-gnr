@@ -24,5 +24,7 @@
     "next": "Lanjutkan",
     "verification": "Verifikasi",
     "chooseVerificationMethod": "Pilih metode verifikasi anda untuk kemanan dan melanjutkan pembayaran pemesanan anda",
-    "email": "Email"
+    "email": "Email",
+    "sendOtpCodeToEmail": "Kirim Kode OTP ke Email",
+    "sendOtp": "Kirim OTP"
 }
