@@ -37,18 +37,10 @@ class _RegisterSendOtpPageState extends State<RegisterSendOtpPage> {
           body: BlocListener<RegisterBloc, RegisterState>(
             listener: (context, state) {
               if (state is RegisterSuccess) {
-                UserData userData = UserData(
-                  fullname: widget.userData.fullname,
-                  email: widget.userData.email,
-                  password: widget.userData.password,
-                  passwordConfirmation: widget.userData.passwordConfirmation,
-                );
-
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            RegisterVerifyOtpPage(userData: userData)));
+                        builder: (context) => RegisterVerifyOtpPage()));
                 return;
               }
 
