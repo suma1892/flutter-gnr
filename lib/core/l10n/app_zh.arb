@@ -26,5 +26,6 @@
     "chooseVerificationMethod": "选择您的验证方法以确保安全并继续支付您的订单",
     "email": "Email地址",
     "sendOtpCodeToEmail": "发送 OTP 代码到电子邮件",
-    "sendOtp": "发送验证"
+    "sendOtp": "发送验证",
+    "send": "发送"
 }

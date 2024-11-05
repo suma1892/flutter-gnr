@@ -11,7 +11,7 @@ import 'package:flutter_get_ride_app/features/register-verify-otp/presentation/b
 import 'package:flutter_get_ride_app/features/register-verify-otp/presentation/bloc/verify_otp_event.dart';
 import 'package:flutter_get_ride_app/features/register-verify-otp/presentation/bloc/verify_otp_state.dart';
 import 'package:flutter_get_ride_app/shared/presetation/pages/bottom_tab.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterVerifyOtpPage extends StatefulWidget {
   const RegisterVerifyOtpPage({super.key});
@@ -92,15 +92,15 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
             },
           ),
         ),
         body: BlocListener<VerifyOtpBloc, VerifyOtpState>(
           listener: (context, state) {
             if (state is VerifyOtpSuccess) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BottomTab()));
+              Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) => BottomTab()));
               return;
             }
 
@@ -117,7 +117,7 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Verifikasi',
+                  AppLocalizations.of(context)!.verification,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -125,7 +125,7 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Pilih metode verifikasi anda untuk keamanan dan melanjutkan pembayaran pemesanan anda',
+                  AppLocalizations.of(context)!.chooseVerificationMethod,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: AppColors.grey4),
                 ),
@@ -182,7 +182,7 @@ class _RegisterVerifyOtpPageState extends State<RegisterVerifyOtpPage> {
                         ),
                       ),
                       child: Text(
-                        'Kirim',
+                        AppLocalizations.of(context)!.send,
                         style: AppTextStyle.smallWhite.merge(
                           const TextStyle(fontWeight: FontWeight.w700),
                         ),

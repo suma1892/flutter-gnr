@@ -26,5 +26,6 @@
     "chooseVerificationMethod": "Choose your verification method for security and proceed with the payment of your order.",
     "email": "Email",
     "sendOtpCodeToEmail": "Send OTP Code to Email",
-    "sendOtp": "Send OTP"
+    "sendOtp": "Send OTP",
+    "send": "Send"
 }

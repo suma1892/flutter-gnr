@@ -21,114 +21,110 @@ class RegisterSendOtpPage extends StatefulWidget {
 class _RegisterSendOtpPageState extends State<RegisterSendOtpPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            elevation: 0,
-          ),
-          body: BlocListener<RegisterBloc, RegisterState>(
-            listener: (context, state) {
-              if (state is RegisterSuccess) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RegisterVerifyOtpPage()));
-                return;
-              }
-
-              if (state is RegisterFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.error)),
-                );
-                return;
-              }
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).pop();
             },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.verification,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          elevation: 0,
+        ),
+        body: BlocListener<RegisterBloc, RegisterState>(
+          listener: (context, state) {
+            if (state is RegisterSuccess) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => RegisterVerifyOtpPage()));
+              return;
+            }
+
+            if (state is RegisterFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.error)),
+              );
+              return;
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.verification,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    AppLocalizations.of(context)!.chooseVerificationMethod,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.grey4,
-                    ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  AppLocalizations.of(context)!.chooseVerificationMethod,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.grey4,
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    AppLocalizations.of(context)!.sendOtpCodeToEmail,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  AppLocalizations.of(context)!.sendOtpCodeToEmail,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
                   ),
-                  SizedBox(height: 16),
-                  Text(
-                    widget.userData.email,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  widget.userData.email,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 30),
-                  BlocBuilder<RegisterBloc, RegisterState>(
-                    builder: (context, state) {
-                      if (state is RegisterLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      return ElevatedButton(
-                        onPressed: () {
-                          context.read<RegisterBloc>().add(
-                                RegisterSubmitted(
-                                    fullname: widget.userData.fullname,
-                                    email: widget.userData.email,
-                                    password: widget.userData.password,
-                                    passwordConfirmation:
-                                        widget.userData.passwordConfirmation),
-                              );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: AppColors.navy,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+                ),
+                SizedBox(height: 30),
+                BlocBuilder<RegisterBloc, RegisterState>(
+                  builder: (context, state) {
+                    if (state is RegisterLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return ElevatedButton(
+                      onPressed: () {
+                        context.read<RegisterBloc>().add(
+                              RegisterSubmitted(
+                                  fullname: widget.userData.fullname,
+                                  email: widget.userData.email,
+                                  password: widget.userData.password,
+                                  passwordConfirmation:
+                                      widget.userData.passwordConfirmation),
+                            );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        backgroundColor: AppColors.navy,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Text(
-                          'Kirim OTP',
-                          style: AppTextStyle.smallWhite.merge(
-                            const TextStyle(fontWeight: FontWeight.w700),
-                          ),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!.sendOtp,
+                        style: AppTextStyle.smallWhite.merge(
+                          const TextStyle(fontWeight: FontWeight.w700),
                         ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

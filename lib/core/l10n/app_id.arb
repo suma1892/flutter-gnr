@@ -23,8 +23,9 @@
     "errorValidatePassword": "Kata sandi minimal 8 karakter, dan memiliki setidaknya satu angka dan huruf",
     "next": "Lanjutkan",
     "verification": "Verifikasi",
-    "chooseVerificationMethod": "Pilih metode verifikasi anda untuk kemanan dan melanjutkan pembayaran pemesanan anda",
+    "chooseVerificationMethod": "Pilih metode verifikasi anda untuk keamanan dan melanjutkan pembayaran pemesanan anda",
     "email": "Email",
     "sendOtpCodeToEmail": "Kirim Kode OTP ke Email",
-    "sendOtp": "Kirim OTP"
+    "sendOtp": "Kirim OTP",
+    "send": "Kirim"
 }
