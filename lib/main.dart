@@ -7,6 +7,7 @@ import 'package:flutter_get_ride_app/features/login/presentation/bloc/login_bloc
 import 'package:flutter_get_ride_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_get_ride_app/features/register-send-otp/presentation/bloc/register_bloc.dart';
+import 'package:flutter_get_ride_app/features/register-verify-otp/presentation/bloc/verify_otp_bloc.dart';
 import 'package:flutter_get_ride_app/features/register/presentation/bloc/check_email_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,6 +47,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider<ServicesBloc>(
           create: (context) => ServicesBloc(),
+        ),
+        BlocProvider<VerifyOtpBloc>(
+          create: (context) => VerifyOtpBloc(),
         ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
