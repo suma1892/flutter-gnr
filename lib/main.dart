@@ -55,7 +55,7 @@ class MainApp extends StatelessWidget {
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           return MaterialApp(
-            localizationsDelegates: [
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

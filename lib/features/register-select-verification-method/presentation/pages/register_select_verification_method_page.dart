@@ -19,72 +19,68 @@ class _RegisterSelectVerificationMethodPageState
     extends State<RegisterSelectVerificationMethodPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.verification,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.verification,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
-              Text(
-                AppLocalizations.of(context)!.chooseVerificationMethod,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.grey4,
-                ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              AppLocalizations.of(context)!.chooseVerificationMethod,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.grey4,
               ),
-              SizedBox(height: 30),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    UserData userData = UserData(
-                        fullname: widget.userData.fullname,
-                        email: widget.userData.email,
-                        password: widget.userData.password,
-                        passwordConfirmation:
-                            widget.userData.passwordConfirmation);
+            ),
+            SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  UserData userData = UserData(
+                      fullname: widget.userData.fullname,
+                      email: widget.userData.email,
+                      password: widget.userData.password,
+                      passwordConfirmation:
+                          widget.userData.passwordConfirmation);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                RegisterSendOtpPage(userData: userData)));
-                  },
-                  icon: Icon(Icons.email, color: Colors.black),
-                  label: Text(AppLocalizations.of(context)!.email,
-                      style: TextStyle(color: Colors.black)),
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          RegisterSendOtpPage(userData: userData)));
+                },
+                icon: Icon(Icons.email, color: Colors.black),
+                label: Text(AppLocalizations.of(context)!.email,
+                    style: TextStyle(color: Colors.black)),
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
